@@ -22,22 +22,20 @@ char *upperstr(char strNsp[]) {
   strcat(strUp, "\n");
   return strUp;
 }
+
 // removes characters ' ' and ',' from userIn
 char *remove_c(char userIn[]) {
-  int ii = 0; // initialize ii in function
+  int i = 0;
   // loop til end of userIn
-  for (int i = 0; userIn[i] != '\n'; ++i) {
-    // userIn not ' ' or ',' set strNsp[ii] to
-    // could be done w/ pointers but whatev
-    if (userIn[i] != ' ' && userIn[i] != ',') {
-      strNsp[ii] = userIn[i];
-      ++ii;
+  for (char *p = &userIn[0]; *p != '\n'; ++p && ++i) {
+    // userIn ' ' or ',' move to next char in arr
+    while (*p == ' ' || *p == ',') {
+      ++p;
     }
+    strNsp[i] = *p;
   }
-  // append new line to check end of read
-  // prob better way to check but whatev
-  strcat(strNsp, "\n");
-  return upperstr(strNsp);
+  // append new line esc, pass through upperstr
+  return upperstr(strcat(strNsp, "\n"));
 }
 
 int main() {
@@ -46,14 +44,14 @@ int main() {
                                                  // could prob be done not rev
 
   double addedG = 0; // added of grades
-  double fG;         //
+  double fG;         // final gpa
   int arrNum[256];   // letter grade to num put to this arr
   int assignNum = 0; // shitty brute force way to assign num to arr
   int divNum;        // cuz pa gets changed and want value of pa at end
   int pa = 0;        // # of passes
   int duf = 1;       // default unfilled courses
   int cToI;          // convert str to int
-  int v = 0;
+  int v = 0;         // valid answer
 
   // display x or not
   char wHonC[2] = {' ', 'X'};
