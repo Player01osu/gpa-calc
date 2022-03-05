@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-char userIn[256];
-char strNsp[256];
-char strUp[256];
+char userIn[256]; // user inputs being stored
+char strNsp[256]; // string no space
+char strUp[256];  // string uppercase
 
 char *upperstr(char strNsp[]) {
   int ii = 0;
@@ -45,15 +45,14 @@ int main() {
   char assignChar[] = {'F', 'D', 'C', 'B', 'A'}; // list of valid char
                                                  // could prob be done not rev
 
-  char userChar[256]; // user input stored
-  double addedG = 0;  // added of grades
-  double fG;          //
-  int arrNum[256];    // letter grade to num put to this arr
-  int assignNum = 0;  // shitty brute force way to assign num to arr
-  int divNum;         // cuz pa gets changed and want value of pa at end
-  int pa = 0;         // # of passes
-  int duf = 1;        // default unfilled courses
-  int cToI;           // convert str to int
+  double addedG = 0; // added of grades
+  double fG;         //
+  int arrNum[256];   // letter grade to num put to this arr
+  int assignNum = 0; // shitty brute force way to assign num to arr
+  int divNum;        // cuz pa gets changed and want value of pa at end
+  int pa = 0;        // # of passes
+  int duf = 1;       // default unfilled courses
+  int cToI;          // convert str to int
   int v = 0;
 
   // display x or not
@@ -120,7 +119,6 @@ int main() {
       usel = 1;
     else
       printf("\nInvalid input, try again\n");
-    // printf("\nwhT %d\n", whT);
   }
 
   int nh = 0; // number of honors
@@ -134,7 +132,6 @@ int main() {
     printf("\nHow many APs: ");
     na = atoi(fgets(userIn, 128, stdin));
   }
-  // printf("\nNH %d\n", nh);
 
   // takes user letter grade input
   printf("\ninput your letter grades (ie: A B C D F): ");
@@ -148,7 +145,6 @@ int main() {
       // set arrNum[i] to coresponding letter in arr
       while (strUp[i] != assignChar[assignNum])
         ++assignNum;
-      // printf("\nassign num %d\n", assignNum);
       arrNum[i] = assignNum;
       ++pa;
       assignNum = 0;
@@ -159,7 +155,6 @@ int main() {
 
   // addeds nums in int arr
   for (int i = 0; pa > 0; ++i) {
-    // printf("\nJBRJJR %d\n", arrNum[i]);
     addedG = addedG + arrNum[i];
     --pa;
   }
