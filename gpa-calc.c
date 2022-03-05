@@ -9,13 +9,14 @@ char strUp[256];
 
 char *upperstr(char strNsp[]) {
   int ii = 0;
-  char Cap[] = {'A', 'B', 'C', 'D', 'F'};
+  char cap[] = {'A', 'B', 'C', 'D', 'F'};
   char noCap[] = {'a', 'b', 'c', 'd', 'f'};
 
   for (int i = 0; strNsp[i] != '\n'; ++i) {
-    while (noCap[ii] != strNsp[i])
+    while (noCap[ii] != strNsp[i] && cap[ii] != strNsp[i])
       ++ii;
-    strUp[i] = Cap[ii];
+    strUp[i] = cap[ii];
+    ii = 0;
   }
 
   strcat(strUp, "\n");
