@@ -5,7 +5,22 @@
 
 char userIn[256];
 char strNsp[256];
+char strUp[256];
 
+char *upperstr(char strNsp[]) {
+  int ii = 0;
+  char Cap[] = {'A', 'B', 'C', 'D', 'F'};
+  char noCap[] = {'a', 'b', 'c', 'd', 'f'};
+
+  for (int i = 0; strNsp[i] != '\n'; ++i) {
+    while (noCap[ii] != strNsp[i])
+      ++ii;
+    strUp[i] = Cap[ii];
+  }
+
+  strcat(strUp, "\n");
+  return strUp;
+}
 // removes characters ' ' and ',' from userIn
 char *remove_c(char userIn[]) {
   int ii = 0; // initialize ii in function
@@ -21,7 +36,7 @@ char *remove_c(char userIn[]) {
   // append new line to check end of read
   // prob better way to check but whatev
   strcat(strNsp, "\n");
-  return strNsp;
+  return upperstr(strNsp);
 }
 
 int main() {
@@ -124,13 +139,13 @@ int main() {
   printf("\ninput your letter grades (ie: A B C D F): ");
   remove_c(fgets(userIn, 256, stdin));
 
-  if (strNsp[0] == '\n') {
+  if (strUp[0] == '\n') {
     pa = 0;
   } else {
     // iterate through str til end
-    for (int i = 0; strNsp[i] != '\n'; ++i) {
+    for (int i = 0; strUp[i] != '\n'; ++i) {
       // set arrNum[i] to coresponding letter in arr
-      while (strNsp[i] != assignChar[assignNum])
+      while (strUp[i] != assignChar[assignNum])
         ++assignNum;
       // printf("\nassign num %d\n", assignNum);
       arrNum[i] = assignNum;
