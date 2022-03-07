@@ -6,6 +6,16 @@
 char userIn[256]; // user inputs being stored
 char strNsp[256]; // string no space
 char strUp[256];  // string uppercase
+int semi = 1;
+double addedG = 0, fG; // added of grades // final gpa
+int semo = 0;          // semester y/n
+
+// addeds nums in int arr
+void sem() {
+  printf("\nhow many semesters: ");
+  semi = atoi(fgets(userIn, 128, stdin));
+  semo = 1;
+}
 
 char *upperstr(char strNsp[]) {
   int ii = 0;
@@ -43,16 +53,12 @@ int main() {
   char assignChar[] = {'F', 'D', 'C', 'B', 'A'}; // list of valid char
                                                  // could prob be done not rev
 
-  double addedG = 0; // added of grades
-  double fG;         // final gpa
   int arrNum[256];   // letter grade to num put to this arr
   int assignNum = 0; // shitty brute force way to assign num to arr
-  int divNum;        // cuz pa gets changed and want value of pa at end
+  int divNum, cToI;  // div by num of passes // convert str to int
   int pa = 0;        // # of passes
   int duf = 1;       // default unfilled courses
-  int cToI;          // convert str to int
   int v = 0;         // valid answer
-
   // display x or not
   char wHonC[2] = {' ', 'X'};
   char wApC[2] = {' ', 'X'};
@@ -72,22 +78,45 @@ int main() {
          "CALCULATOR                  "
          "||\n||                                                  ||"
          "\n======================================================\n");
+  printf("\nCount by semesters? [y/N] ");
+  fgets(userIn, 8, stdin);
+  if (userIn[0] == 'y' || userIn[0] == 'Y') {
+    sem();
+  } else if (userIn[0] == 'n' || userIn[0] == 'N' || userIn[0] == '\n')
+    semo = 0;
+  else
+    return 0;
+
   printf("\ndefault unfilled courses to A's? [Y/n] ");
   fgets(userIn, 8, stdin);
   if (userIn[0] == 'y' || userIn[0] == 'Y' || userIn[0] == '\n')
     duf = 1;
-  else if (userIn[0] == 'n')
+  else if (userIn[0] == 'n' || userIn[0] == 'N')
     duf = 0;
   else
     return 0;
 
-  if (duf) {
+  if (duf && !semo) {
     while (!v) {
       printf("\nhow many courses to account for (default 7): ");
       fgets(userIn, 32, stdin);
       cToI = atoi(userIn);
       if (userIn[0] == '\n') {
         cToI = 7;
+        v = 1;
+      } else if (!cToI) {
+        printf("\ninvalid input, try again");
+        v = 0;
+      } else
+        v = 1;
+    }
+  } else if (semo) {
+    while (!v) {
+      printf("\nhow many courses per semester (default 7): ");
+      fgets(userIn, 32, stdin);
+      cToI = semi * atoi(userIn);
+      if (userIn[0] == '\n') {
+        cToI = semi * 7;
         v = 1;
       } else if (!cToI) {
         printf("\ninvalid input, try again");
@@ -159,7 +188,7 @@ int main() {
   if (!duf)
     fG = addedG / divNum; // divide by total # of c
   else
-    fG = (addedG + (((nh + na) + (4 * (cToI - divNum))))) / cToI;
+    fG = (addedG + ((semi * (nh + na) + (4 * (cToI - divNum))))) / cToI;
 
   printf("\nfinal gpa is %f\n", fG);
 }
