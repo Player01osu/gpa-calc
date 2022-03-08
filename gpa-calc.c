@@ -32,6 +32,8 @@ void ansemo() {
 void sem() {
   printf("\nhow many semesters (default 1): ");
   semi = atoi(fgets(userIn, 128, stdin));
+  if (!semi)
+    semi = 1;
   semo = 1;
 }
 
@@ -177,12 +179,10 @@ int main() {
       na = atoi(fgets(userIn, 128, stdin));
     }
   } else if (semo) {
-    if (whT) {
+    if (whT)
       hnsemo();
-    }
-    if (waT) {
+    if (waT)
       ansemo();
-    }
   }
 
   // takes user letter grade input
