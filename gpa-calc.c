@@ -14,7 +14,7 @@ double na = 0;         // number of aps
 
 void hnsemo() {
   int i = 1;
-  for (int ii = semi; ii > 0; --ii && ++i) {
+  for (int ii = semi; ii > 0; --ii, ++i) {
     printf("\nhow many honors in semester %d: ", i);
     nh = nh + atoi(fgets(userIn, 128, stdin));
   }
@@ -22,7 +22,7 @@ void hnsemo() {
 }
 void ansemo() {
   int i = 1;
-  for (int ii = semi; ii > 0; --ii && ++i) {
+  for (int ii = semi; ii > 0; --ii, ++i) {
     printf("\nhow many APs in semester %d: ", i);
     na = na + atoi(fgets(userIn, 128, stdin));
   }
@@ -55,7 +55,7 @@ char *upperstr(char strNsp[]) {
 char *remove_c(char userIn[]) {
   int i = 0;
   // loop til end of userIn
-  for (char *p = &userIn[0]; *p != '\n'; ++p && ++i) {
+  for (char *p = &userIn[0]; *p != '\n'; ++p, ++i) {
     // userIn ' ' or ',' move to next char in arr
     while (*p == ' ' || *p == ',') {
       ++p;
