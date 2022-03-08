@@ -30,7 +30,7 @@ void ansemo() {
 }
 // addeds nums in int arr
 void sem() {
-  printf("\nhow many semesters: ");
+  printf("\nhow many semesters (default 1): ");
   semi = atoi(fgets(userIn, 128, stdin));
   semo = 1;
 }
@@ -211,7 +211,7 @@ int main() {
     --pa;
   }
   if (!duf)
-    fG = addedG / divNum; // divide by total # of c
+    fG = (addedG + ((semi * (nh + na)))) / divNum; // divide by total # of c
   else
     fG = (addedG + ((semi * (nh + na) + (4 * (cToI - divNum))))) / cToI;
 
