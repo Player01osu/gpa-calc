@@ -9,7 +9,25 @@ char strUp[256];  // string uppercase
 int semi = 1;
 double addedG = 0, fG; // added of grades // final gpa
 int semo = 0;          // semester y/n
+double nh = 0;         // number of honors
+double na = 0;         // number of aps
 
+void hnsemo() {
+  int i = 1;
+  for (int ii = semi; ii > 0; --ii && ++i) {
+    printf("\nhow many honors in semester %d: ", i);
+    nh = nh + atoi(fgets(userIn, 128, stdin));
+  }
+  nh = nh / semi;
+}
+void ansemo() {
+  int i = 1;
+  for (int ii = semi; ii > 0; --ii && ++i) {
+    printf("\nhow many APs in semester %d: ", i);
+    na = na + atoi(fgets(userIn, 128, stdin));
+  }
+  na = na / semi;
+}
 // addeds nums in int arr
 void sem() {
   printf("\nhow many semesters: ");
@@ -148,16 +166,23 @@ int main() {
       printf("\nInvalid input, try again\n");
   }
 
-  int nh = 0; // number of honors
-  int na = 0; // number of aps
   // how many honors
-  if (whT) {
-    printf("\nHow many honors: ");
-    nh = atoi(fgets(userIn, 128, stdin));
-  }
-  if (waT) {
-    printf("\nHow many APs: ");
-    na = atoi(fgets(userIn, 128, stdin));
+  if (!semo) {
+    if (whT) {
+      printf("\nHow many honors: ");
+      nh = atoi(fgets(userIn, 128, stdin));
+    }
+    if (waT) {
+      printf("\nHow many APs: ");
+      na = atoi(fgets(userIn, 128, stdin));
+    }
+  } else if (semo) {
+    if (whT) {
+      hnsemo();
+    }
+    if (waT) {
+      ansemo();
+    }
   }
 
   // takes user letter grade input
