@@ -53,13 +53,19 @@ char *upperstr(char strNsp[]) {
   return strUp;
 }
 
+int pl = 0; // plus
+int mi = 0; // minus
 // removes characters ' ' and ',' from userIn
 char *remove_c(char userIn[]) {
   int i = 0;
   // loop til end of userIn
   for (char *p = &userIn[0]; *p != '\n'; ++p, ++i) {
     // userIn ' ' or ',' move to next char in arr
-    while (*p == ' ' || *p == ',') {
+    while (*p == ' ' || *p == ',' || *p == '+' || *p == '-') {
+      if (*p == '+')
+        ++pl;
+      if (*p == '-')
+        ++mi;
       ++p;
     }
     strNsp[i] = *p;
@@ -82,8 +88,6 @@ int main() {
   // display x or not
   char wHonC[2] = {' ', 'X'};
   char wApC[2] = {' ', 'X'};
-  char wpC[2] = {' ', 'X'};
-  char wmC[2] = {' ', 'X'};
 
   // toggle for weighting options
   int whT = 0;
@@ -148,10 +152,8 @@ int main() {
 
   printf("\nhow would you like your gpa weighted: \n");
   while (!usel) {
-    printf("\n1.) weigh honors [%c] 2.) weigh ap [%c] 3.) weigh plus [%c] 4.) "
-           "weigh "
-           "minus [%c]: ",
-           wHonC[whT], wApC[waT], wpC[wpT], wmC[wmT]);
+    printf("\n1.) weigh honors [%c] 2.) weigh ap [%c] enter to proceed: ",
+           wHonC[whT], wApC[waT]);
     fgets(userIn, 256, stdin);
 
     if (atoi(&userIn[0]) == 1)
@@ -210,10 +212,14 @@ int main() {
     addedG = addedG + arrNum[i];
     --pa;
   }
+  double mia = mi * -0.3;
+  double pla = pl * 0.3;
   if (!duf)
-    fG = (addedG + ((semi * (nh + na)))) / divNum; // divide by total # of c
+    fG = (pla + mia + (addedG + ((semi * (nh + na))))) /
+         divNum; // divide by total # of c
   else
-    fG = (addedG + ((semi * (nh + na) + (4 * (cToI - divNum))))) / cToI;
+    fG = (pla + mia + (addedG + ((semi * (nh + na) + (4 * (cToI - divNum)))))) /
+         cToI;
 
   printf("\nfinal gpa is %f\n", fG);
 }
